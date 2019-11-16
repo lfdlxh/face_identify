@@ -34,6 +34,7 @@ public class MyService {
     private final String aliyunURL = "http://121.199.23.49:8001";
     private final String localURL = "http://192.168.43.156:8000";
     private final String URL416 = "http://192.168.1.100:8000";
+    private volatile boolean threadOver = false;
 
     private Context context;
     private InfoActivity activity;
@@ -142,6 +143,7 @@ public class MyService {
                         String add_result = add_response.body().string();
                         JSONObject ar = JSON.parseObject(add_result);
                         ar_msg = ar.getString("error_msg");
+                        threadOver = true;
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -151,7 +153,7 @@ public class MyService {
         af.start();
         af.join();
         //上传到服务器
-        System.out.println(ar_msg);
+
         if(ar_msg.equals("SUCCESS")){
             Thread uploadToServer =new Thread(){
                 public void run(){

@@ -1,5 +1,7 @@
 package com.hahaha.face_v2;
 
+import android.text.format.Time;
+
 import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonParser;
 
@@ -10,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -47,9 +50,9 @@ public class ExampleUnitTest {
         System.out.println(stringBuffer.toString());
 
     }
-@Test
+    @Test
     public void  test_11(){
-
+        System.out.println(System.currentTimeMillis());
     }
 
     @Test
@@ -97,7 +100,7 @@ public class ExampleUnitTest {
         byte[] fileBuf = null;
 
         try {
-            InputStream imgInputStream = new FileInputStream("/Users/xxc/AndroidStudioProjects/face_v2/app/src/main/res/drawable/banner.png");
+            InputStream imgInputStream = new FileInputStream("/Users/xxc/AndroidStudioProjects/face_v2/app/src/main/res/drawable/test2.jpg");
             fileBuf = convertToBytes(imgInputStream);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -127,8 +130,8 @@ public class ExampleUnitTest {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("userid", uuid)
-                .addFormDataPart("userinfo", "test_face")
-                .addFormDataPart("user_face", "test.jpg", formBody)
+                .addFormDataPart("userinfo", "test2_face")
+                .addFormDataPart("user_face", "test2.jpg", formBody)
                 .build();
         Request request = new Request.Builder()
                 .url(localURL + "/face/add_face")

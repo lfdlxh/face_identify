@@ -31,9 +31,9 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <WebView
+                android:id="@+id/webview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/webview"></WebView>
+                android:layout_height="match_parent"></WebView>
 
 
         </LinearLayout>
@@ -61,7 +61,8 @@
             app:qmui_radiusBottomRight="8dp"
             app:qmui_borderColor="#ffffff"
             android:text="Faces"
-            android:textSize="24sp"></com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton>
+            android:textSize="24sp"
+            android:onClick="facesRefresh"></com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton>
     </LinearLayout>
 
 </RelativeLayout>

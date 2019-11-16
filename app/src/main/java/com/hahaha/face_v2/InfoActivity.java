@@ -1,7 +1,10 @@
 package com.hahaha.face_v2;
 
+
+import androidx.annotation.RequiresApi;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -9,16 +12,26 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+
+import android.os.Build;
+
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+
+import com.qmuiteam.qmui.widget.webview.QMUIWebView;
+
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -56,6 +69,7 @@ import static com.hahaha.face_v2.util.Util.convertToBytes;
 import static kotlin.text.Typography.degree;
 
 
+
 public class InfoActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_CODE = 1;
     private static final int INTENT_REQUEST_IMAGE_CODE = 1;
@@ -72,21 +86,35 @@ public class InfoActivity extends AppCompatActivity {
     private final String localURL = "http://192.168.43.156:8000";
     private final String URL416 = "http://192.168.1.100:8000";
 
+
+    private WebView webView;
+
+
     private Context context;
 
 
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
-        WebView webView =findViewById(R.id.webview);
-        WebSettings settings= webView.getSettings();
+
+        webView =findViewById(R.id.webview);
+
+
+        WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webView.loadUrl("http://121.199.23.49:8010/");
+        settings.setAllowContentAccess(true);
+        settings.setAllowUniversalAccessFromFileURLs(true);
+
         webView.addJavascriptInterface(new MyService(this,InfoActivity.this),"myService");
 
 
+        //webView.loadUrl("http://192.168.43.156:8000/face/");
+        //webView.loadUrl("http://192.168.1.103:8001/face/");
+        webView.loadUrl(aliyunURL + "/face/");
     }
 
     public void toHome(View view) {
@@ -309,6 +337,12 @@ public class InfoActivity extends AppCompatActivity {
 //        System.out.println("hi");
 //    }
 
+
+
+
+    public void facesRefresh(View view) {
+        webView.reload();
+    }
 
 
 
