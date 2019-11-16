@@ -1,36 +1,16 @@
 package com.hahaha.face_v2.Service;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Base64;
-import android.view.View;
 import android.webkit.JavascriptInterface;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.hahaha.face_v2.InfoActivity;
-import com.hahaha.face_v2.MainActivity;
-import com.hahaha.face_v2.UserAdapter.UserAdapter;
 import com.hahaha.face_v2.postbodys.checkBody;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,9 +21,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.app.PendingIntent.getActivity;
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-import static com.hahaha.face_v2.util.Util.convertToBytes;
 
 public class MyService {
     private String result;
@@ -54,7 +31,7 @@ public class MyService {
     private String user_info;
     private String user_id;
     private String img;
-    private final String aliyunURL = "http://121.199.23.49:8000";
+    private final String aliyunURL = "http://121.199.23.49:8001";
     private final String localURL = "http://192.168.43.156:8000";
     private final String URL416 = "http://192.168.1.100:8000";
 
@@ -98,19 +75,6 @@ public class MyService {
         return result;
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case REQUEST_WRITE_EXTERNAL_STORAGE_CODE:
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    openGallery();
-//                } else {
-//                    Toast.makeText(context, "读相册的操作被拒绝", Toast.LENGTH_LONG).show();
-//                }
-//                break;
-//        }
-//    }
     @JavascriptInterface
     public String addface() throws InterruptedException {
          img = InfoActivity.img64;
@@ -187,7 +151,8 @@ public class MyService {
         af.start();
         af.join();
         //上传到服务器
-        if(ar_msg=="SUCCESS"){
+        System.out.println(ar_msg);
+        if(ar_msg.equals("SUCCESS")){
             Thread uploadToServer =new Thread(){
                 public void run(){
                     //解析add_resut，拿到user_id,user_info,img64

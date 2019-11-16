@@ -59,11 +59,7 @@ import static kotlin.text.Typography.degree;
 public class InfoActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_CODE = 1;
     private static final int INTENT_REQUEST_IMAGE_CODE = 1;
-    private ListView listView;
-    private JSONArray users;
-    private UserAdapter adapter;
-    private String Uname;
-    private String result;
+
     private String uploadFileName;
     public static byte[] fileBuf;
     private String originImg64;
@@ -71,11 +67,7 @@ public class InfoActivity extends AppCompatActivity {
     private Bitmap bitmap;
     public static
     String img64;
-    private String resultmsg;
     public static String ar_msg;
-    static volatile boolean threadFlag = false;
-    private String user_info;
-    private String user_id;
     private final String aliyunURL = "http://121.199.23.49:8001";
     private final String localURL = "http://192.168.43.156:8000";
     private final String URL416 = "http://192.168.1.100:8000";

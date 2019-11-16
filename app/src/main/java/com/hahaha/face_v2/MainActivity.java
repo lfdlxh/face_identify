@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     private byte[] fileBuf;
     private Uri imageUri;
     private String uploadFileName;
-    private final String aliyunURL = "http://121.199.23.49:8000";
+    private final String aliyunURL = "http://121.199.23.49:8001";
     private String user_id;
     private float score;
     private String user_info;
